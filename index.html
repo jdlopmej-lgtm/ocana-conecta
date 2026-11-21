@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ocaña Conecta — Incidencias Urbanas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Ocaña Conecta</h1>
+    <p>Plataforma colaborativa para comunicar incidencias y mejorar nuestro municipio</p>
+    <span class="badge">v1.0 — Despliegue Automático con Docker</span>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Comunicar nueva incidencia</h2>
+      <form id="form-incidencia">
+        <label for="titulo">Título de la incidencia</label>
+        <input type="text" id="titulo" placeholder="Ej. Farola fundida en Plaza Mayor" required />
+
+        <label for="categoria">Categoría</label>
+        <select id="categoria">
+          <option value="Alumbrado">Alumbrado público</option>
+          <option value="Limpieza">Limpieza y residuos</option>
+          <option value="Mobiliario">Mobiliario urbano / Aceras</option>
+          <option value="Parques">Parques y jardines</option>
+        </select>
+
+        <label for="ubicacion">Ubicación / Calle</label>
+        <input type="text" id="ubicacion" placeholder="Ej. Calle Mayor, 14, Ocaña" required />
+
+        <button type="submit">Enviar reporte</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Incidencias recientes en Ocaña</h2>
+      <ul id="lista-incidencias">
+        <li>
+          <strong>Bache en calzada</strong> — Calle Toledo, 8
+          <span class="estado abierta">Abierta</span>
+        </li>
+        <li>
+          <strong>Contenedor desbordado</strong> — Avenida del Parque
+          <span class="estado proceso">En revisión</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('form-incidencia');
+    const lista = document.getElementById('lista-incidencias');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const titulo = document.getElementById('titulo').value;
+      const categoria = document.getElementById('categoria').value;
+      const ubicacion = document.getElementById('ubicacion').value;
+
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>[${categoria}] ${titulo}</strong> — ${ubicacion} <span class="estado abierta">Nueva</span>`;
+      lista.prepend(li);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
